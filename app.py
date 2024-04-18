@@ -22,15 +22,15 @@ def predict_datapoint():
     else:
         data=CustomData(
             airline=request.form.get('airline'),
+            flight = request.form.get('flight'),
             source_city=request.form.get('source_city'),
             departure_time=request.form.get('departure_time'),
             stops=request.form.get('stops'),
             arrival_time=request.form.get('arrival_time'),
             destination_city=request.form.get('destination_city'),
-            class_type=float(request.form.get('class_type')),
-            duration=float(request.form.get('duration'))
-            days_left=float(request.form.get('days_left'))
-
+            class_type=(request.form.get('class_type')),
+            duration=float(request.form.get('duration')),
+            days_left=int(request.form.get('days_left'))
         )
         pred_df=data.get_data_as_data_frame()
         print(pred_df)
