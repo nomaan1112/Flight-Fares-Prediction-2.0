@@ -28,6 +28,7 @@ class DataIngestion:
         logging.info("Entered the Data ingestion component")
         try:
             df = pd.read_csv("E:\Projects\Flight-Fares-Prediction-2.0\Data\FLIGHT_Dataset.csv")
+            df = df.dropna()
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
 

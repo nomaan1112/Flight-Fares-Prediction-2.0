@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.impute import SimpleImputer
 import os
 from src.exception import CustomException
 from src.logger import logging
@@ -37,12 +38,14 @@ class DataTransformation:
 
             numerical_pipeline = Pipeline(
                 steps=[
+                    ("imputer",SimpleImputer(strategy="median")),
                     ("scaler", StandardScaler())
                 ]
             )
 
             categorical_pipeline = Pipeline(
                 steps=[
+                    ("imputer",SimpleImputer(strategy="most_frequent")),
                     ("one_hot_encoder", OneHotEncoder(sparse=False,handle_unknown='ignore')),
                     ("scaler", StandardScaler())
                 ]
