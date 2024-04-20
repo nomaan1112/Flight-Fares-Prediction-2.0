@@ -6,6 +6,5 @@ WORKDIR /app
 COPY . /app
 
 RUN pip install -r requirements.txt
-RUN pip install --upgrade accelerate
 
 CMD ["python3", "app.py"]
