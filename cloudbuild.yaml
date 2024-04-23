@@ -1,0 +1,22 @@
+steps:
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+            'build',
+            '-t',
+            'asia-south2-docker.pkg.dev/flight-fares-prediction/ffp-repo/my-app:${SHORT_SHA}',
+            '-t',
+            'asia-south2-docker.pkg.dev/flight-fares-prediction/ffp-repo/my-app:latest',
+            '--cache-from',
+            'asia-south2-docker.pkg.dev/flight-fares-prediction/ffp-repo/my-app:latest',
+            '.'
+          ]
+
+  # Docker push to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',  'asia-south2-docker.pkg.dev/flight-fares-prediction/ffp-repo/my-app:${SHORT_SHA}']
+
+# Store images in Google Artifact Registry 
+images:
+  - asia-south2-docker.pkg.dev/flight-fares-prediction/ffp-repo/my-app:${SHORT_SHA}
+  - asia-south2-docker.pkg.dev/flight-fares-prediction/ffp-repo/my-app:latest
