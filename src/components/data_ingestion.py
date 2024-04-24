@@ -25,10 +25,15 @@ class DataIngestion:
         self.ingestion_config = DataIngestionConfig()
 
     def initiate_data_ingestion(self):
-        logging.info("Entered the Data ingestion component")
+        logging.info("Entered the Data ingestion phase.")
         try:
-            df = pd.read_csv("E:\Projects\Flight-Fares-Prediction-2.0\Data\FLIGHT_Dataset.csv")
-            df = df.dropna()
+            file_name = 'Updated_dataset.csv'
+            current_dir=os.getcwd()
+            components = current_dir.split(os.sep)
+            second_prev_dir = os.sep.join(components[:-2])
+            file_path = os.path.join(second_prev_dir,'Data',file_name)
+            logging.info("Reading the Dataset from the file")
+            df = pd.read_csv(file_path)
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
 
